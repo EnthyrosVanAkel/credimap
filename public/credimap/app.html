@@ -15,11 +15,25 @@
 		<link rel="stylesheet" type="text/css" href="css/icons.css" />
 		<link rel="stylesheet" type="text/css" href="css/style3.css" />
 		<script src="js/modernizr.custom.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  
+		<script src="js/gmaps.js"></script>
+<style type="text/css">
+    #mapa {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
 	</head>
 	<body>
-		<div class="container">
-			
 
+	<div id="mapa" style="position: absolute; background-color: rgb(229, 227, 223);">
+	</div>
+
+	<div class="container">
+		<div>nosdfn</div>
 			<nav id="bt-menu" class="bt-menu">
 				<a href="#" class="bt-menu-trigger"><span>Menu</span></a>
 				<ul>
@@ -34,6 +48,42 @@
 		</div><!-- /container -->
 	</body>
 
+<script type="text/javascript">
+
+var map;
+    $(document).ready(function(){
+      var map = new GMaps({
+        el: '#mapa',
+        lat: 19.442225,
+        lng:  -99.203614
+      });
+
+    center = map.addMarker({
+  lat: 19.442225,
+  lng: -99.203614,
+  icon : {
+                size : new google.maps.Size(64,64),
+                url : 'imgs/pin.png'
+              }
+
+});
+
+    
+      GMaps.geolocate({
+        success: function(position){
+          map.setCenter(position.coords.latitude, position.coords.longitude);
+        },
+        error: function(error){
+          alert('No se puedo localizar: '+error.message);
+        },
+        not_supported: function(){
+          alert("Cambiate de compu");
+        }
+      });
+    });
+
+
+</script>
 
 	<script src="js/classie.js"></script>
 	<script src="js/borderMenu.js"></script>
