@@ -15,8 +15,8 @@
         <link rel="stylesheet" type="text/css" href="/credimap/css/icons.css" />
         <link rel="stylesheet" type="text/css" href="/credimap/css/style3.css" />
         <script src="/credimap/js/modernizr.custom.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
   
         <script src="/credimap/js/gmaps.js"></script>
 
