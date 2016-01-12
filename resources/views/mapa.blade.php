@@ -7,7 +7,7 @@
         <title>Credimap | Campus Party</title>
         <meta name="description" content="Proyecto para el concurso de Campus Party y PRONAFIM creado por Vladimir Galicia y Mario Ortega" />
         <meta name="keywords" content="campus party,pronafim, microfinanciamiento, empresario, financiamiento, negocios, recursos, fondo, apoyo, iniciativas, secretaria de economia, economia, gobierno federal, apoyar, bajos ingresos, ingresos, empleo, oportunidades de negocio, mexicanas, mexicanos, inversion, desarrolladas, mexico, habilidades empresariales basicas, empresariales, programa nacional, microempresario, marginacion" />
-        <meta name="author" content="Codrops" />
+        <meta name="author" content="Vladimir" />
         <link rel="shortcut icon" type="image/x-icon" href="http://www.pronafim.gob.mx/static/img/favicon.ico">
 
         <link rel="stylesheet" type="text/css" href="/credimap/css/normalize.css" />
@@ -19,6 +19,8 @@
             <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   
         <script src="/credimap/js/gmaps.js"></script>
+
+
 <style type="text/css">
     #mapa {
       width: 100%;
