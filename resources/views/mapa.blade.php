@@ -13,7 +13,6 @@
         <link rel="stylesheet" type="text/css" href="/credimap/css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="/credimap/css/demo.css" />
         <link rel="stylesheet" type="text/css" href="/credimap/css/icons.css" />
-        <link rel="stylesheet" type="text/css" href="/credimap/css/style3.css" />
         <script src="/credimap/js/modernizr.custom.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
             <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
@@ -21,70 +20,82 @@
         <script src="/credimap/js/gmaps.js"></script>
 
 
-<style type="text/css">
-    #mapa {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
-
     </head>
     <body>
+    <div id="mapa"></div>
 
-    <div id="mapa" style="position: absolute; background-color: rgb(229, 227, 223);">
+    <div id="container">
+        <div id="nav">Nav dgMenu</div>
     </div>
-
-    <div class="container">
-        <div>nosdfn</div>
-            <nav id="bt-menu" class="bt-menu">
-                <a href="#" class="bt-menu-trigger"><span>Menu</span></a>
-                <ul>
-                    <li><a href="#" class="bt-icon icon-user-outline">Credi-Mapa</a></li>
-                    <li>.</li>
-                    <li><</li>
-                    <li>></li>
-                    <li><a href="#" class="bt-icon icon-star">.</a></li>
-                    <li><a href="#" class="bt-icon icon-bubble">Calculadora</a></li>
-                </ul>
-            </nav>
-        </div><!-- /container -->
     </body>
 
 <script type="text/javascript">
-
 var map;
-    $(document).ready(function(){
-      var map = new GMaps({
-        el: '#mapa',
-        lat: 19.442225,
-        lng:  -99.203614
-      });
 
-    center = map.addMarker({
-  lat: 19.442225,
-  lng: -99.203614,
-  icon : {
-                size : new google.maps.Size(64,64),
-                url : '/credimap/imgs/pin.png'
+    function loadResults (data) {
+      var items, markers_data = [];
+      if (data.venues.length > 0) {
+        items = data.venues;
+
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+
+          if (item.location.lat != undefined && item.location.lng != undefined) {
+            var icon = 'https://foursquare.com/img/categories/food/default.png';
+
+            markers_data.push({
+              lat : item.location.lat,
+              lng : item.location.lng,
+              title : item.name,
+              icon : {
+                size : new google.maps.Size(32, 32),
+                url : icon
               }
-
-});
-
-    
-      GMaps.geolocate({
-        success: function(position){
-          map.setCenter(position.coords.latitude, position.coords.longitude);
-        },
-        error: function(error){
-          alert('No se puedo localizar: '+error.message);
-        },
-        not_supported: function(){
-          alert("Cambiate de compu");
+            });
+          }
         }
-      });
+      }
+
+      map.addMarkers(markers_data);
+    }
+
+
+    $(document).on('click', '.pan-to-marker', function(e) {
+      e.preventDefault();
+
+      var position, lat, lng, $index;
+
+      $index = $(this).data('marker-index');
+
+      position = map.markers[$index].getPosition();
+
+      lat = position.lat();
+      lng = position.lng();
+
+      map.setCenter(lat, lng);
     });
 
 
+      map = new GMaps({
+        div: '#mapa',
+        lat: -12.043333,
+        lng: -77.028333
+      });
+
+      map.on('marker_added', function (marker) {
+        var index = map.markers.indexOf(marker);
+        $('#results').append('<li><a href="#" class="pan-to-marker" data-marker-index="' + index + '">' + marker.title + '</a></li>');
+
+        if (index == map.markers.length - 1) {
+          map.fitZoom();
+        }
+      });
+
+      var xhr = $.getJSON('https://coffeemaker.herokuapp.com/foursquare.json?q[near]=Lima,%20PE&q[query]=Ceviche');
+
+     
+      xhr.done(loadResults);
+   
 </script>
 
     <script src="/credimap/js/classie.js"></script>

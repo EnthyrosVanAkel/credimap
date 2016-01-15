@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('mapa');
 });
 
+Route::get('api/v0/microfinacieras', 'Api@mapas');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
