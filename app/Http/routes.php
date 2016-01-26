@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('mapa');
+    return view('credimap/mapa');
 });
 
 Route::get('api/v0/microfinacieras', 'Api@mapas');
